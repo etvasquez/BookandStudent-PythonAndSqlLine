@@ -1,0 +1,95 @@
+<html>
+  <head>
+      <title>Web Services</title>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Pagina Principal</h1>
+      <div class="row">
+      <div class="col-md-4">
+      <form method="POST" action="./addBook">
+      <div class="form-group">
+        <h2>Agregar Libro</h2>
+        <input class="form-control" type="text" name="libro">
+        <input style="float: all; margin-left: 450px;margin-top:-35px;" class="btn btn-primary" type="submit" value="Add">
+      </div>
+      </form>
+      </div> 
+      </div> 
+      <div class="row">
+      <div class="col-md-10">
+      <h1 style="padding-bottom: 20px;background: #8BEDD5; text-align: center;">Lista de Libros</h1>
+      <table class="table table-hover">
+        {% for book in books %}
+        <tr>
+          <td>
+            <p>{{book.title}}</p>
+          </td>
+          <td>
+            <form method="POST" action="./update">
+              <input type="hidden" value="{{book.id}}" name="idlibro">
+              <input type="text" placeholder="Valor a modificar" name="newtitle">
+              <input class="btn btn-success" type="submit" value="Update">
+            </form>
+          </td>
+          <td>
+              <form method="POST" action="./delete" style="display: inline">
+                <input type="hidden" value="{{book.id}}" name="idlibro">
+                <input class="btn btn-success" type="submit" value="Delete">
+              </form>
+            </td>
+         </tr>
+        {% endfor %}
+      </table>
+    </div>
+    </div>
+      <div class="row">
+      <div class="col-md-3">
+        <form method="POST" action="./addStudent">
+        <div  class="form-group"> 
+          <h2 style="padding-bottom: 20px;">Agregar Estudiante</h2>
+          <p style="float: all;">Nombre: </p>
+          <input style="float: all; margin-left: 60px;margin-top:-35px;" class="form-control" type="text" name="nombre">
+          <p style="float: all; margin-left: 350px;margin-top:-35px;">Apellido: </p>
+          <input style="float: all; margin-left: 450px;margin-top:-35px;" class="form-control" type="text" name="apellido">
+          <input style="float: all; margin-left: 800px;margin-top:-35px;" class="btn btn-primary" type="submit" value="Add">
+        </div>
+        </form>
+      </div> 
+      </div>   
+    <div class="row">
+      <div class="col-md-10">
+      <h1 style="padding-bottom: 20px; background: #8BEDD5; text-align: center;">Lista de Estudiantes</h1>
+      <table class="table table-hover">
+        {% for student in students %}
+        <tr>
+          <td>
+            <p>{{student.nombre}} {{student.apellido}}</p>
+          </td>
+          <td>
+            <form method="POST" action="./updateStudent">
+              <input type="hidden" value="{{student.id}}" name="idstudent" >
+              <input type="text" placeholder="Nombre a modificar" name="newname">
+              <input type="text" placeholder="Apellido a modificar" name="newlast">
+              <input class="btn btn-success" type="submit" value="Update">
+            </form>
+          </td>
+          <td>
+              <form method="POST" action="./deleteStudent" style="display: inline">
+                <input type="hidden" value="{{student.id}}" name="idstudent">
+                <input class="btn btn-success" type="submit" value="Delete">
+              </form>
+            </td>
+         </tr>
+        {% endfor %}
+      </table>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript"  src="{{ url_for('static', filename='js/jquery-1.12.1.js') }}"></script>
+    <script type="text/javascript"  src="{{ url_for('static', filename='js/bootstrap.js' ) }}"></script>
+  </body>
+</html>
